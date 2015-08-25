@@ -10,7 +10,7 @@ public class EC25519CloudNumberUtil {
 	public static final String XDI_SCHEME_ECC25519 = ":publickey-curve25519-base58-check:";
 	public static final byte XDI_APPCODE_ECC25519 = 0x00;
 
-	public static CloudNumber createECC25519CloudNumber(Character cs, byte[] pub) throws Exception {
+	public static CloudNumber createECC25519CloudNumber(Character cs, byte[] pub) throws GeneralSecurityException {
 
 		String string = cs.charValue() + XDIConstants.S_IMMUTABLE.toString() + XDI_SCHEME_ECC25519 + base58WithAppCodeAndChecksum(pub);
 
