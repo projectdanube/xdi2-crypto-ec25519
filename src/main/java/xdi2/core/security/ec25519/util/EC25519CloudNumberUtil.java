@@ -36,11 +36,6 @@ public class EC25519CloudNumberUtil {
 		return Arrays.copyOfRange(bytes, 1, bytes.length - 4);
 	}
 
-	private static byte[] checksum(byte[] bytesAppCodeAndKey) throws GeneralSecurityException {
-
-		return SHA256.sha256(SHA256.sha256(bytesAppCodeAndKey));
-	}
-
 	private static boolean appCodeCorrect(byte[] bytes) {
 
 		return bytes[0] == XDI_APPCODE_ECC25519;
@@ -55,6 +50,15 @@ public class EC25519CloudNumberUtil {
 		System.arraycopy(bytes, 33, bytesChecksum, 0, 4);
 
 		return Arrays.equals(bytesChecksum, checksum(bytesAppCodeAndKey));
+	}
+
+	private static byte[] checksum(byte[] bytesAppCodeAndKey) throws GeneralSecurityException {
+
+		byte[] bytesChecksum = new byte[4];
+
+		System.arraycopy(SHA256.sha256(SHA256.sha256(bytesAppCodeAndKey)), 0, bytesChecksum, 0, 4);
+
+		return bytesChecksum;
 	}
 
 	private static String base58WithAppCodeAndChecksum(byte[] key) throws GeneralSecurityException {
