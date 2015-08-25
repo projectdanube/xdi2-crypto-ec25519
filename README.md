@@ -5,6 +5,8 @@ This is a crypto plugin for the [XDI2](http://github.com/projectdanube/xdi2) ser
 
 It can use [Curve25519](http://cr.yp.to/ecdh.html) for XDI cryptographic operations.
 
+This requires [kalium](https://github.com/abstractj/kalium) and [libsodium](http://libsodium.org/).
+
 ### Information
 
 TODO

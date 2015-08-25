@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>xdi2-crypto-ecc25519</name>
+	<name>xdi2-crypto-ec25519</name>
 	<comment></comment>
 	<projects>
 	</projects>

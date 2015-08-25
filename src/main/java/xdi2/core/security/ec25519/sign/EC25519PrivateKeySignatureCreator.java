@@ -1,4 +1,4 @@
-package xdi2.core.security.ecc25519.sign;
+package xdi2.core.security.ec25519.sign;
 
 import java.security.GeneralSecurityException;
 import java.util.Arrays;
@@ -10,27 +10,28 @@ import org.slf4j.LoggerFactory;
 
 import jnr.ffi.byref.LongLongByReference;
 import xdi2.core.ContextNode;
+import xdi2.core.features.signatures.EC25519Signature;
+import xdi2.core.features.signatures.Signature;
 import xdi2.core.features.signatures.Signatures;
-import xdi2.core.features.signatures.ecc25519.ECC25519Signature;
 import xdi2.core.syntax.XDIAddress;
 
 /**
  * This is an ECC25519SignatureCreator that create an XDI ECC25519Signature using a private key,
  * which can be obtained using the XDI address that identifies the signer.
  */
-public abstract class ECC25519PrivateKeySignatureCreator extends AbstractECC25519SignatureCreator implements ECC25519SignatureCreator {
+public abstract class EC25519PrivateKeySignatureCreator extends AbstractEC25519SignatureCreator implements EC25519SignatureCreator {
 
-	private static Logger log = LoggerFactory.getLogger(ECC25519PrivateKeySignatureCreator.class.getName());
+	private static Logger log = LoggerFactory.getLogger(EC25519PrivateKeySignatureCreator.class.getName());
 
 	private String digestAlgorithm;
 	private Integer digestLength;
 
-	public ECC25519PrivateKeySignatureCreator() {
+	public EC25519PrivateKeySignatureCreator() {
 
 	}
 
 	@Override
-	public ECC25519Signature create(byte[] normalizedSerialization, ContextNode contextNode, XDIAddress signerXDIAddress) throws GeneralSecurityException {
+	public EC25519Signature create(byte[] normalizedSerialization, ContextNode contextNode, XDIAddress signerXDIAddress) throws GeneralSecurityException {
 
 		// obtain private key
 
@@ -45,11 +46,11 @@ public abstract class ECC25519PrivateKeySignatureCreator extends AbstractECC2551
 
 		// create signature
 
-		ECC25519Signature signature;
+		EC25519Signature signature;
 
 		try {
 
-			signature = (ECC25519Signature) Signatures.createSignature(
+			signature = (EC25519Signature) Signatures.createSignature(
 					contextNode,
 					this.getDigestAlgorithm(), 
 					this.getDigestLength(), 
@@ -71,7 +72,7 @@ public abstract class ECC25519PrivateKeySignatureCreator extends AbstractECC2551
 	}
 
 	@Override
-	public void setValue(byte[] normalizedSerialization, ECC25519Signature signature, XDIAddress signerXDIAddress) throws GeneralSecurityException {
+	public void setValue(byte[] normalizedSerialization, EC25519Signature signature, XDIAddress signerXDIAddress) throws GeneralSecurityException {
 
 		// obtain private key
 
@@ -89,7 +90,7 @@ public abstract class ECC25519PrivateKeySignatureCreator extends AbstractECC2551
 		this.setValue(normalizedSerialization, signature, privateKey);
 	}
 
-	public void setValue(byte[] normalizedSerialization, ECC25519Signature signature, byte[] privateKey) throws GeneralSecurityException {
+	public void setValue(byte[] normalizedSerialization, Signature signature, byte[] privateKey) throws GeneralSecurityException {
 
 		// set signature value
 
@@ -114,7 +115,7 @@ public abstract class ECC25519PrivateKeySignatureCreator extends AbstractECC2551
 
 	public static String getPrivateKeyAlgorithm(byte[] privateKey) {
 
-		return ECC25519Signature.KEY_ALGORITHM_ECC25519;
+		return EC25519Signature.KEY_ALGORITHM_EC25519;
 	}
 
 	public static Integer getPrivateKeyLength(byte[] privateKey) {

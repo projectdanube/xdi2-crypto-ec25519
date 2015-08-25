@@ -1,4 +1,4 @@
-package xdi2.core.security.ecc25519.validate;
+package xdi2.core.security.ec25519.validate;
 
 import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
@@ -11,23 +11,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jnr.ffi.byref.LongLongByReference;
-import xdi2.core.features.signatures.ecc25519.ECC25519Signature;
+import xdi2.core.features.signatures.EC25519Signature;
 import xdi2.core.syntax.XDIAddress;
 
 /**
  * This is an ECC25519SignatureValidater that validate an XDI ECC25519Signature using a public key,
  * which can be obtained using the XDI address that identifies the signer.
  */
-public abstract class ECC25519PublicKeySignatureValidator extends AbstractECC25519SignatureValidator implements ECC25519SignatureValidator {
+public abstract class EC25519PublicKeySignatureValidator extends AbstractEC25519SignatureValidator implements EC25519SignatureValidator {
 
-	private static Logger log = LoggerFactory.getLogger(ECC25519PublicKeySignatureValidator.class.getName());
+	private static Logger log = LoggerFactory.getLogger(EC25519PublicKeySignatureValidator.class.getName());
 
-	public ECC25519PublicKeySignatureValidator() {
+	public EC25519PublicKeySignatureValidator() {
 
 	}
 
 	@Override
-	public boolean validate(byte[] normalizedSerialization, byte[] signatureValue, ECC25519Signature signature, XDIAddress signerXDIAddress) throws GeneralSecurityException {
+	public boolean validate(byte[] normalizedSerialization, byte[] signatureValue, EC25519Signature signature, XDIAddress signerXDIAddress) throws GeneralSecurityException {
 
 		// obtain public key
 
@@ -36,7 +36,6 @@ public abstract class ECC25519PublicKeySignatureValidator extends AbstractECC255
 		if (publicKey == null) {
 
 			if (log.isDebugEnabled()) log.debug("No public key found for " + signerXDIAddress);
-
 			return false;
 		}
 
@@ -47,7 +46,7 @@ public abstract class ECC25519PublicKeySignatureValidator extends AbstractECC255
 		return this.validate(normalizedSerialization, signatureValue, signature, publicKey);
 	}
 
-	public boolean validate(byte[] normalizedSerialization, byte[] signatureValue, ECC25519Signature signature, byte[] publicKey) throws GeneralSecurityException {
+	public boolean validate(byte[] normalizedSerialization, byte[] signatureValue, EC25519Signature signature, byte[] publicKey) throws GeneralSecurityException {
 
 		byte[] sigAndMsg = new byte[signatureValue.length + normalizedSerialization.length];
 		System.arraycopy(signatureValue, 0, sigAndMsg, 0, signatureValue.length);

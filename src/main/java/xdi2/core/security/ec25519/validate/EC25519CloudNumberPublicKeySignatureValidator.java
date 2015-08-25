@@ -1,10 +1,10 @@
-package xdi2.core.security.ecc25519.validate;
+package xdi2.core.security.ec25519.validate;
 
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.Map;
 
-import xdi2.core.security.ecc25519.util.ECC25519CloudNumberUtil;
+import xdi2.core.security.ec25519.util.EC25519CloudNumberUtil;
 import xdi2.core.syntax.CloudNumber;
 import xdi2.core.syntax.XDIAddress;
 
@@ -12,25 +12,25 @@ import xdi2.core.syntax.XDIAddress;
  * This is an ECC25519PublicKeySignatureValidater that validate an XDI ECC25519Signature by
  * obtaining public keys from a statically configured list.
  */
-public class ECC25519CloudNumberPublicKeySignatureValidator extends ECC25519PublicKeySignatureValidator {
+public class EC25519CloudNumberPublicKeySignatureValidator extends EC25519PublicKeySignatureValidator {
 
 	private Map<XDIAddress, byte[]> publicKeys;
 
-	public ECC25519CloudNumberPublicKeySignatureValidator(Map<XDIAddress, byte[]> publicKeys) {
+	public EC25519CloudNumberPublicKeySignatureValidator(Map<XDIAddress, byte[]> publicKeys) {
 
 		super();
 
 		this.publicKeys = publicKeys;
 	}
 
-	public ECC25519CloudNumberPublicKeySignatureValidator(byte[] publicKey) {
+	public EC25519CloudNumberPublicKeySignatureValidator(byte[] publicKey) {
 
 		super();
 
 		this.publicKeys = Collections.singletonMap(null, publicKey);
 	}
 
-	public ECC25519CloudNumberPublicKeySignatureValidator() {
+	public EC25519CloudNumberPublicKeySignatureValidator() {
 
 		super();
 	}
@@ -43,7 +43,7 @@ public class ECC25519CloudNumberPublicKeySignatureValidator extends ECC25519Publ
 		CloudNumber signerCloudNumber = CloudNumber.fromXDIAddress(signerXDIAddress);
 		if (signerCloudNumber == null) return null;
 
-		byte[] publicKey = ECC25519CloudNumberUtil.publicKeyFromECC25519CloudNumber(signerCloudNumber);
+		byte[] publicKey = EC25519CloudNumberUtil.publicKeyFromECC25519CloudNumber(signerCloudNumber);
 		if (publicKey == null) return null;
 
 		// done

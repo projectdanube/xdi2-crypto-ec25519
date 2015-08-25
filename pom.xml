@@ -3,27 +3,27 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>xdi2</groupId>
-	<artifactId>xdi2-crypto-ecc25519</artifactId>
+	<artifactId>xdi2-crypto-ec25519</artifactId>
 	<packaging>jar</packaging>
 	<version>0.8-SNAPSHOT</version>
-	<name>xdi2-crypto-ecc25519</name>
+	<name>xdi2-crypto-ec25519</name>
 
 	<issueManagement>
-		<url>https://github.com/projectdanube/xdi2-crypto-ecc25519/issues</url>
+		<url>https://github.com/projectdanube/xdi2-crypto-ec25519/issues</url>
 		<system>GitHub Issues</system>
 	</issueManagement>
 
 	<distributionManagement>
 		<site>
 			<id>github-project-site</id>
-			<url>scm:git:ssh://git@github.com/projectdanube/xdi2-crypto-ecc25519.git:gh-pages</url>
+			<url>scm:git:ssh://git@github.com/projectdanube/xdi2-crypto-ec25519.git:gh-pages</url>
 		</site>
 	</distributionManagement>
 
 	<scm>
-		<url>https://github.com/projectdanube/xdi2-crypto-ecc25519</url>
-		<connection>scm:git:git://github.com/projectdanube/xdi2-crypto-ecc25519.git</connection>
-		<developerConnection>scm:git:git@github.com:projectdanube/xdi2-crypto-ecc25519.git</developerConnection>
+		<url>https://github.com/projectdanube/xdi2-crypto-ec25519</url>
+		<connection>scm:git:git://github.com/projectdanube/xdi2-crypto-ec25519.git</connection>
+		<developerConnection>scm:git:git@github.com:projectdanube/xdi2-crypto-ec25519.git</developerConnection>
 	</scm>
 
 	<properties>

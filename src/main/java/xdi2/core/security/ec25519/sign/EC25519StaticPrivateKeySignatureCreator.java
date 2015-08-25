@@ -1,4 +1,4 @@
-package xdi2.core.security.ecc25519.sign;
+package xdi2.core.security.ec25519.sign;
 
 import java.util.Collections;
 import java.util.Map;
@@ -9,25 +9,25 @@ import xdi2.core.syntax.XDIAddress;
  * This is an RSAPrivateKeySignatureCreator that create an XDI RSASignature by
  * obtaining private keys from a statically configured list.
  */
-public class ECC25519StaticPrivateKeySignatureCreator extends ECC25519PrivateKeySignatureCreator {
+public class EC25519StaticPrivateKeySignatureCreator extends EC25519PrivateKeySignatureCreator {
 
 	private Map<XDIAddress, byte[]> privateKeys;
 
-	public ECC25519StaticPrivateKeySignatureCreator(Map<XDIAddress, byte[]> privateKeys) {
+	public EC25519StaticPrivateKeySignatureCreator(Map<XDIAddress, byte[]> privateKeys) {
 
 		super();
 
 		this.privateKeys = privateKeys;
 	}
 
-	public ECC25519StaticPrivateKeySignatureCreator(byte[] privateKey) {
+	public EC25519StaticPrivateKeySignatureCreator(byte[] privateKey) {
 
 		super();
 
 		this.privateKeys = Collections.singletonMap(null, privateKey);
 	}
 
-	public ECC25519StaticPrivateKeySignatureCreator() {
+	public EC25519StaticPrivateKeySignatureCreator() {
 
 		super();
 	}

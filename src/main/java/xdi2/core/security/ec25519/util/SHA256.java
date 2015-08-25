@@ -1,4 +1,4 @@
-package xdi2.core.security.ecc25519.util;
+package xdi2.core.security.ec25519.util;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 

@@ -1,4 +1,4 @@
-package xdi2.core.security.ecc25519.sign;
+package xdi2.core.security.ec25519.sign;
 
 import java.security.GeneralSecurityException;
 
@@ -16,20 +16,20 @@ import xdi2.core.util.GraphUtil;
  * This is an ECC25519PrivateKeySignatureCreator that create an XDI ECC25519Signature by
  * obtaining private keys from a "private key graph".
  */
-public class ECC25519GraphPrivateKeySignatureCreator extends ECC25519PrivateKeySignatureCreator implements GraphAware {
+public class EC25519GraphPrivateKeySignatureCreator extends EC25519PrivateKeySignatureCreator implements GraphAware {
 
-	private static Logger log = LoggerFactory.getLogger(ECC25519GraphPrivateKeySignatureCreator.class.getName());
+	private static Logger log = LoggerFactory.getLogger(EC25519GraphPrivateKeySignatureCreator.class.getName());
 
 	private Graph privateKeyGraph;
 
-	public ECC25519GraphPrivateKeySignatureCreator(Graph privateKeyGraph) {
+	public EC25519GraphPrivateKeySignatureCreator(Graph privateKeyGraph) {
 
 		super();
 
 		this.privateKeyGraph = privateKeyGraph;
 	}
 
-	public ECC25519GraphPrivateKeySignatureCreator() {
+	public EC25519GraphPrivateKeySignatureCreator() {
 
 		super();
 
