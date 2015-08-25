@@ -5,4 +5,8 @@ import xdi2.core.security.sign.AbstractSignatureCreator;
 
 public abstract class AbstractEC25519SignatureCreator extends AbstractSignatureCreator<EC25519Signature> implements EC25519SignatureCreator {
 
+	protected AbstractEC25519SignatureCreator() {
+
+		super(EC25519Signature.class);
+	}
 }
