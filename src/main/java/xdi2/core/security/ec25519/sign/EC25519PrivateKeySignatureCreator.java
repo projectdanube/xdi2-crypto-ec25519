@@ -39,7 +39,8 @@ public abstract class EC25519PrivateKeySignatureCreator extends AbstractEC25519S
 
 		if (privateKey == null) {
 
-			throw new GeneralSecurityException("No private key found for " + signerXDIAddress);
+			if (log.isDebugEnabled()) log.debug("No private key found for " + signerXDIAddress);
+			return null;
 		}
 
 		if (log.isDebugEnabled()) log.debug("Private key found for " + signerXDIAddress + ".");
