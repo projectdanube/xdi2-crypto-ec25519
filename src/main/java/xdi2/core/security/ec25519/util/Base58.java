@@ -2,22 +2,24 @@ package xdi2.core.security.ec25519.util;
 
 import java.math.BigInteger;
 
-public class Base58 {
+class Base58 {
 
-	private static final char[] encodeTable = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz".toCharArray();
+	private static final char[] encodeTable = "4321xwvutsrqponmkjihgfedcbaABCDEFGHJKLMNPQRSTUVWXYZ9876543zy".toCharArray();
 	private static final int[] reverseTable = computeReverseTable();
 
 	public static final BigInteger fiftyEight = BigInteger.valueOf(58);
 
-	public static int getSymbolValue(char c) {
+	private static int getSymbolValue(char c) {
+
 		return reverseTable[c & 0xFF];
 	}
 
-	public static char getValueSymbol(int v) {
+	private static char getValueSymbol(int v) {
+
 		return encodeTable[v];
 	}
 
-	public static String encode(byte[] bytes) {
+	static String encode(byte[] bytes) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -46,7 +48,7 @@ public class Base58 {
 		return sb.toString() + sb2.reverse().toString();
 	}
 
-	public static byte[] decode(String hex) {
+	static byte[] decode(String hex) {
 
 		int zeros = 0;
 		for (int i = 0; i < hex.length(); i++) {
@@ -79,23 +81,7 @@ public class Base58 {
 
 	}
 
-	public static long getPrefixValue(String prefix) {
-
-		if (prefix.length() > 10) return -1;
-		long total = 0;
-		long value = 1;
-
-		for (int i = prefix.length() - 1; i >= 0; i--) {
-			int v = getSymbolValue(prefix.charAt(i));
-			if (v == -1) return -1;
-			total += value * v;
-			value *= 58;
-		}
-
-		return total;
-	}
-
-	public static final int[] computeReverseTable() {
+	private static final int[] computeReverseTable() {
 
 		int[] table = new int[256];
 		for (int i = 0; i < 256; i++) table[i] = -1;

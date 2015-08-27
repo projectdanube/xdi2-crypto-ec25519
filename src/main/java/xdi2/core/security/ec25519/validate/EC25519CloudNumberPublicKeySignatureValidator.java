@@ -43,7 +43,7 @@ public class EC25519CloudNumberPublicKeySignatureValidator extends EC25519Public
 		CloudNumber signerCloudNumber = CloudNumber.fromXDIAddress(signerXDIAddress);
 		if (signerCloudNumber == null) return null;
 
-		byte[] publicKey = EC25519CloudNumberUtil.publicKeyFromECC25519CloudNumber(signerCloudNumber);
+		byte[] publicKey = EC25519CloudNumberUtil.publicKeyFromEC25519CloudNumber(signerCloudNumber);
 		if (publicKey == null) return null;
 
 		// done

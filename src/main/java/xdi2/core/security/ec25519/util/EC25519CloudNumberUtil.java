@@ -3,42 +3,44 @@ import java.security.GeneralSecurityException;
 import java.util.Arrays;
 
 import xdi2.core.constants.XDIConstants;
+import xdi2.core.security.ec25519.constants.EC25519Constants;
 import xdi2.core.syntax.CloudNumber;
 
 public class EC25519CloudNumberUtil {
 
-	public static final String XDI_SCHEME_ECC25519 = ":publickey-curve25519-base58-check:";
-	public static final byte XDI_APPCODE_ECC25519 = 0x00;
+	public static CloudNumber createEC25519CloudNumber(Character cs, byte[] pub) throws GeneralSecurityException {
 
-	public static CloudNumber createECC25519CloudNumber(Character cs, byte[] pub) throws GeneralSecurityException {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(cs.charValue());
+		buffer.append(XDIConstants.S_IMMUTABLE.toString());
+		buffer.append(EC25519Constants.XDI_SCHEME_EC25519);
+		buffer.append(base58WithAppCodeAndChecksum(pub));
 
-		String string = cs.charValue() + XDIConstants.S_IMMUTABLE.toString() + XDI_SCHEME_ECC25519 + base58WithAppCodeAndChecksum(pub);
-
-		return CloudNumber.create(string);
+		return CloudNumber.create(buffer.toString());
 	}
 
-	public static boolean isECC25519CloudNumber(CloudNumber cloudNumber) {
+	public static boolean isEC25519CloudNumber(CloudNumber cloudNumber) {
 
-		return cloudNumber.toString().startsWith(cloudNumber.getXDIAddress().getFirstXDIArc().getCs().charValue() + XDIConstants.S_IMMUTABLE.toString() + XDI_SCHEME_ECC25519);
+		return cloudNumber.toString().startsWith(cloudNumber.getXDIAddress().getFirstXDIArc().getCs().charValue() + XDIConstants.S_IMMUTABLE.toString() + EC25519Constants.XDI_SCHEME_EC25519);
 	}
 
-	public static byte[] publicKeyFromECC25519CloudNumber(CloudNumber cloudNumber) throws GeneralSecurityException {
+	public static byte[] publicKeyFromEC25519CloudNumber(CloudNumber cloudNumber) throws GeneralSecurityException {
 
 		if (cloudNumber == null) throw new NullPointerException();
-		if (! isECC25519CloudNumber(cloudNumber)) return null;
+		if (! isEC25519CloudNumber(cloudNumber)) return null;
 
-		String string = cloudNumber.toString().substring(2 + XDI_SCHEME_ECC25519.length());
+		String string = cloudNumber.toString().substring(2 + EC25519Constants.XDI_SCHEME_EC25519.length());
 		byte[] bytes = Base58.decode(string);
 
-		if (! appCodeCorrect(bytes)) throw new GeneralSecurityException("App code invalid for ECC25519 cloud number: " + cloudNumber);
-		if (! checksumCorrect(bytes)) throw new GeneralSecurityException("Checksum invalid for ECC25519 cloud number: " + cloudNumber);
+		if (! appCodeCorrect(bytes)) throw new GeneralSecurityException("App code invalid for EC25519 cloud number: " + cloudNumber);
+		if (! checksumCorrect(bytes)) throw new GeneralSecurityException("Checksum invalid for EC25519 cloud number: " + cloudNumber);
 
 		return Arrays.copyOfRange(bytes, 1, bytes.length - 4);
 	}
 
 	private static boolean appCodeCorrect(byte[] bytes) {
 
-		return bytes[0] == XDI_APPCODE_ECC25519;
+		return bytes[0] == EC25519Constants.XDI_APPCODE_EC25519;
 	}
 
 	private static boolean checksumCorrect(byte[] bytes) throws GeneralSecurityException {
@@ -64,7 +66,7 @@ public class EC25519CloudNumberUtil {
 	private static String base58WithAppCodeAndChecksum(byte[] key) throws GeneralSecurityException {
 
 		byte[] bytesAppCodeAndKey = new byte[33];
-		bytesAppCodeAndKey[0] = XDI_APPCODE_ECC25519;
+		bytesAppCodeAndKey[0] = EC25519Constants.XDI_APPCODE_EC25519;
 		System.arraycopy(key, 0, bytesAppCodeAndKey, 1, 32);
 
 		byte[] bytesChecksum = checksum(bytesAppCodeAndKey);
