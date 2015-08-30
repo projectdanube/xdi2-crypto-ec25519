@@ -48,16 +48,16 @@ class Base58 {
 		return sb.toString() + sb2.reverse().toString();
 	}
 
-	static byte[] decode(String hex) {
+	static byte[] decode(String b58) {
 
 		int zeros = 0;
-		for (int i = 0; i < hex.length(); i++) {
-			if (hex.charAt(i) == '1') zeros++; else break;
+		for (int i = 0; i < b58.length(); i++) {
+			if (b58.charAt(i) == '1') zeros++; else break;
 		}
 
 		BigInteger n = BigInteger.ZERO;
 		BigInteger d = fiftyEight;
-		String encoded = hex.substring(zeros);
+		String encoded = b58.substring(zeros);
 
 		for (int i = 0; i < encoded.length(); i++) {
 			n = n.multiply(d);
