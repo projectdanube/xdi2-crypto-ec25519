@@ -8,6 +8,7 @@ import org.abstractj.kalium.NaCl.Sodium;
 
 import jnr.ffi.byref.LongLongByReference;
 import xdi2.core.security.ec25519.crypto.EC25519Provider;
+import xdi2.core.security.ec25519.crypto.RandomProvider;
 import xdi2.core.security.ec25519.crypto.SHA256Provider;
 
 public class NaClSodiumEC25519Provider extends EC25519Provider {
@@ -25,14 +26,15 @@ public class NaClSodiumEC25519Provider extends EC25519Provider {
 
 		// create seed
 
-		byte[] seed = new byte[256];
-
-		sodium.randombytes(seed, 256);
+		byte[] seed = RandomProvider.get().randomBytes(256);
 		seed = SHA256Provider.get().sha256(seed);
 
-		// create key pairs
+		// create key pair
 
 		sodium.crypto_sign_ed25519_seed_keypair(publicKey, privateKey, seed);
+
+		assert(publicKey.length == 32);
+		assert(privateKey.length == 32);
 	}
 
 	@Override
