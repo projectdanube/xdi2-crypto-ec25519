@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import xdi2.core.constants.XDIConstants;
 import xdi2.core.security.ec25519.constants.EC25519Constants;
+import xdi2.core.security.ec25519.crypto.SHA256Provider;
 import xdi2.core.syntax.CloudNumber;
 
 public class EC25519CloudNumberUtil {
@@ -58,7 +59,7 @@ public class EC25519CloudNumberUtil {
 
 		byte[] bytesChecksum = new byte[4];
 
-		System.arraycopy(SHA256.sha256(SHA256.sha256(bytesAppCodeAndKey)), 0, bytesChecksum, 0, 4);
+		System.arraycopy(SHA256Provider.get().sha256(SHA256Provider.get().sha256(bytesAppCodeAndKey)), 0, bytesChecksum, 0, 4);
 
 		return bytesChecksum;
 	}

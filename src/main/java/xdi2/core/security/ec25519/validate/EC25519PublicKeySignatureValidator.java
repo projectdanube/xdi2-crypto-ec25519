@@ -2,16 +2,13 @@ package xdi2.core.security.ec25519.validate;
 
 import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
-import java.util.Arrays;
 
-import org.abstractj.kalium.NaCl;
-import org.abstractj.kalium.NaCl.Sodium;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import jnr.ffi.byref.LongLongByReference;
 import xdi2.core.features.signatures.EC25519Signature;
+import xdi2.core.security.ec25519.crypto.EC25519Provider;
 import xdi2.core.syntax.XDIAddress;
 
 /**
@@ -48,19 +45,7 @@ public abstract class EC25519PublicKeySignatureValidator extends AbstractEC25519
 
 	public boolean validate(byte[] normalizedSerialization, byte[] signatureValue, EC25519Signature signature, byte[] publicKey) throws GeneralSecurityException {
 
-		byte[] sigAndMsg = new byte[signatureValue.length + normalizedSerialization.length];
-		System.arraycopy(signatureValue, 0, sigAndMsg, 0, signatureValue.length);
-		System.arraycopy(normalizedSerialization, 0, sigAndMsg, signatureValue.length, normalizedSerialization.length);
-
-		byte[] buffer = new byte[sigAndMsg.length];
-		LongLongByReference bufferLen = new LongLongByReference();
-
-		int ret = NaCl.sodium().crypto_sign_ed25519_open(buffer, bufferLen, sigAndMsg, sigAndMsg.length, publicKey);
-		if (ret != 0) throw new RuntimeException("Crypto error.");
-
-		buffer = Arrays.copyOf(buffer, buffer.length - Sodium.SIGNATURE_BYTES);
-
-		return Arrays.equals(normalizedSerialization, buffer);
+		return EC25519Provider.get().validate(normalizedSerialization, signatureValue, publicKey);
 	}
 
 	protected abstract byte[] getPublicKey(XDIAddress signerXDIAddress) throws GeneralSecurityException;

@@ -1,18 +1,15 @@
 package xdi2.core.security.ec25519.sign;
 
 import java.security.GeneralSecurityException;
-import java.util.Arrays;
 
-import org.abstractj.kalium.NaCl;
-import org.abstractj.kalium.NaCl.Sodium;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import jnr.ffi.byref.LongLongByReference;
 import xdi2.core.ContextNode;
 import xdi2.core.features.signatures.EC25519Signature;
 import xdi2.core.features.signatures.Signature;
 import xdi2.core.features.signatures.Signatures;
+import xdi2.core.security.ec25519.crypto.EC25519Provider;
 import xdi2.core.syntax.XDIAddress;
 
 /**
@@ -95,15 +92,7 @@ public abstract class EC25519PrivateKeySignatureCreator extends AbstractEC25519S
 
 		// set signature value
 
-		byte[] signatureValue = new byte[Sodium.SIGNATURE_BYTES + normalizedSerialization.length];
-		Arrays.fill(signatureValue, 0, Sodium.SIGNATURE_BYTES, (byte) 0);
-		System.arraycopy(normalizedSerialization, 0, signatureValue, Sodium.SIGNATURE_BYTES, normalizedSerialization.length);
-		LongLongByReference bufferLen = new LongLongByReference();
-
-		int ret = NaCl.sodium().crypto_sign_ed25519(signatureValue, bufferLen, normalizedSerialization, normalizedSerialization.length, privateKey);
-		if (ret != 0) throw new RuntimeException("Crypto error.");
-
-		signatureValue = Arrays.copyOfRange(signatureValue, 0, Sodium.SIGNATURE_BYTES);
+		byte[] signatureValue = EC25519Provider.get().sign(normalizedSerialization, privateKey);
 
 		signature.setSignatureValue(signatureValue);
 	}
