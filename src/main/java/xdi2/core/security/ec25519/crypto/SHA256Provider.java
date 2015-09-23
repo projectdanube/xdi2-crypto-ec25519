@@ -20,7 +20,7 @@ public abstract class SHA256Provider {
 
 				if (result == null) {
 
-					ServiceLoader<SHA256Provider> serviceLoader = ServiceLoader.load(SHA256Provider.class);
+					ServiceLoader<SHA256Provider> serviceLoader = ServiceLoader.load(SHA256Provider.class, ClassLoader.getSystemClassLoader());
 					Iterator<SHA256Provider> iterator = serviceLoader.iterator();
 					if (! iterator.hasNext()) throw new RuntimeException("No " + SHA256Provider.class.getName() + " registered");
 
