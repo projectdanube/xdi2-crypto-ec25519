@@ -1,4 +1,4 @@
-package xdi2.core.security.ec25519.validate;
+package xdi2.core.security.ec25519.signature.validate;
 
 import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;

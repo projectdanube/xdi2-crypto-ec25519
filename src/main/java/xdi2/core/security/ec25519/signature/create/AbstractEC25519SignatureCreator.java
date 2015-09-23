@@ -1,4 +1,4 @@
-package xdi2.core.security.ec25519.sign;
+package xdi2.core.security.ec25519.signature.create;
 
 import xdi2.core.features.signatures.EC25519Signature;
 import xdi2.core.security.signature.create.AbstractSignatureCreator;
