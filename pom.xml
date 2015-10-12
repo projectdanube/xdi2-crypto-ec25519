@@ -5,7 +5,7 @@
 	<groupId>xdi2</groupId>
 	<artifactId>xdi2-crypto-ec25519</artifactId>
 	<packaging>jar</packaging>
-	<version>0.8-SNAPSHOT</version>
+	<version>0.8-M1</version>
 	<name>xdi2-crypto-ec25519</name>
 
 	<properties>
@@ -118,14 +118,14 @@
 		<dependency>
 			<groupId>xdi2</groupId>
 			<artifactId>xdi2-core</artifactId>
-			<version>0.8-SNAPSHOT</version>
+			<version>0.8-M1</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>xdi2</groupId>
 			<artifactId>xdi2-core</artifactId>
-			<version>0.8-SNAPSHOT</version>
+			<version>0.8-M1</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
