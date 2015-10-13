@@ -24,6 +24,9 @@ public class NaClSodiumEC25519Provider extends EC25519Provider {
 	@Override
 	public void generateEC25519KeyPair(byte[] publicKey, byte[] privateKey) throws GeneralSecurityException {
 
+		if (privateKey.length != Sodium.PUBLICKEY_BYTES + Sodium.PUBLICKEY_BYTES) throw new GeneralSecurityException("Invalid private key length.");
+		if (publicKey.length != Sodium.PUBLICKEY_BYTES) throw new GeneralSecurityException("Invalid public key length.");
+
 		// create seed
 
 		byte[] seed = RandomProvider.get().randomBytes(256);
@@ -32,13 +35,13 @@ public class NaClSodiumEC25519Provider extends EC25519Provider {
 		// create key pair
 
 		sodium.crypto_sign_ed25519_seed_keypair(publicKey, privateKey, seed);
-
-		assert(publicKey.length == 32);
-		assert(privateKey.length == 32);
+		System.arraycopy(publicKey, 0, privateKey, Sodium.PUBLICKEY_BYTES, Sodium.PUBLICKEY_BYTES);
 	}
 
 	@Override
 	public byte[] sign(byte[] message, byte[] privateKey) throws GeneralSecurityException {
+
+		if (privateKey.length != Sodium.SECRETKEY_BYTES + Sodium.PUBLICKEY_BYTES) throw new GeneralSecurityException("Invalid private key length.");
 
 		byte[] signatureValue = new byte[Sodium.SIGNATURE_BYTES + message.length];
 		Arrays.fill(signatureValue, 0, Sodium.SIGNATURE_BYTES, (byte) 0);
@@ -56,6 +59,9 @@ public class NaClSodiumEC25519Provider extends EC25519Provider {
 
 	@Override
 	public boolean validate(byte[] message, byte[] signatureValue, byte[] publicKey) throws GeneralSecurityException {
+
+		if (signatureValue.length != Sodium.SIGNATURE_BYTES) throw new GeneralSecurityException("Invalid signature length.");
+		if (publicKey.length != Sodium.PUBLICKEY_BYTES) throw new GeneralSecurityException("Invalid public key length.");
 
 		byte[] sigAndMsg = new byte[signatureValue.length + message.length];
 		System.arraycopy(signatureValue, 0, sigAndMsg, 0, signatureValue.length);

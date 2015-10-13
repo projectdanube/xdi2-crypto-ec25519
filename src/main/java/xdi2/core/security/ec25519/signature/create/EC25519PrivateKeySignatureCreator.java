@@ -2,6 +2,7 @@ package xdi2.core.security.ec25519.signature.create;
 
 import java.security.GeneralSecurityException;
 
+import org.apache.commons.codec.binary.Hex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -92,7 +93,11 @@ public abstract class EC25519PrivateKeySignatureCreator extends AbstractEC25519S
 
 		// set signature value
 
+		System.out.println(">>>  " + String.valueOf(Hex.encodeHex(privateKey)));
+		System.out.println(">>>  " + String.valueOf(Hex.encodeHex(normalizedSerialization)));
+
 		byte[] signatureValue = EC25519Provider.get().sign(normalizedSerialization, privateKey);
+		System.out.println(">>>  " + String.valueOf(Hex.encodeHex(signatureValue)));
 
 		signature.setSignatureValue(signatureValue);
 	}
