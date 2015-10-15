@@ -93,11 +93,7 @@ public abstract class EC25519PrivateKeySignatureCreator extends AbstractEC25519S
 
 		// set signature value
 
-		System.out.println(">>>  " + String.valueOf(Hex.encodeHex(privateKey)));
-		System.out.println(">>>  " + String.valueOf(Hex.encodeHex(normalizedSerialization)));
-
 		byte[] signatureValue = EC25519Provider.get().sign(normalizedSerialization, privateKey);
-		System.out.println(">>>  " + String.valueOf(Hex.encodeHex(signatureValue)));
 
 		signature.setSignatureValue(signatureValue);
 	}
