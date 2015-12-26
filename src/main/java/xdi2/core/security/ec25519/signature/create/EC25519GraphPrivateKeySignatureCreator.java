@@ -51,8 +51,7 @@ public class EC25519GraphPrivateKeySignatureCreator extends EC25519PrivateKeySig
 		XdiEntity signerXdiEntity = XdiCommonRoot.findCommonRoot(this.getPrivateKeyGraph()).getXdiEntity(signerXDIAddress, false);
 		signerXdiEntity = signerXdiEntity == null ? null : signerXdiEntity.dereference();
 
-		if (log.isDebugEnabled()) log.debug("Signer entity: " + signerXdiEntity);
-
+		if (log.isDebugEnabled()) log.debug("Signer entity: " + signerXdiEntity + " in graph " + GraphUtil.getOwnerPeerRootXDIArc(this.getPrivateKeyGraph()));
 		if (signerXdiEntity == null) return null;
 
 		// find private key
