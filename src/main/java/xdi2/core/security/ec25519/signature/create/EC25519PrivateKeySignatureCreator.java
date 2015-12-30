@@ -2,7 +2,6 @@ package xdi2.core.security.ec25519.signature.create;
 
 import java.security.GeneralSecurityException;
 
-import org.apache.commons.codec.binary.Hex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
