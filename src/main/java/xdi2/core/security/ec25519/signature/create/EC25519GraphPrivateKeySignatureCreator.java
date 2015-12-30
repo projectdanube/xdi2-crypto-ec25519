@@ -9,14 +9,13 @@ import xdi2.core.Graph;
 import xdi2.core.features.nodetypes.XdiCommonRoot;
 import xdi2.core.features.nodetypes.XdiEntity;
 import xdi2.core.syntax.XDIAddress;
-import xdi2.core.util.GraphAware;
 import xdi2.core.util.GraphUtil;
 
 /**
  * This is an ECC25519PrivateKeySignatureCreator that create an XDI ECC25519Signature by
  * obtaining private keys from a "private key graph".
  */
-public class EC25519GraphPrivateKeySignatureCreator extends EC25519PrivateKeySignatureCreator implements GraphAware {
+public class EC25519GraphPrivateKeySignatureCreator extends EC25519PrivateKeySignatureCreator {
 
 	private static Logger log = LoggerFactory.getLogger(EC25519GraphPrivateKeySignatureCreator.class.getName());
 
@@ -61,16 +60,6 @@ public class EC25519GraphPrivateKeySignatureCreator extends EC25519PrivateKeySig
 		// done
 
 		return privateKey;
-	}
-
-	/*
-	 * GraphAware
-	 */
-
-	@Override
-	public void setGraph(Graph graph) {
-
-		if (this.getPrivateKeyGraph() == null) this.setPrivateKeyGraph(graph);
 	}
 
 	/*
