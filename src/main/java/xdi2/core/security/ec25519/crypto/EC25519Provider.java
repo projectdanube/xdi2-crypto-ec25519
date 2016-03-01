@@ -20,7 +20,7 @@ public abstract class EC25519Provider {
 
 				if (result == null) {
 
-					ServiceLoader<EC25519Provider> serviceLoader = ServiceLoader.load(EC25519Provider.class);
+					ServiceLoader<EC25519Provider> serviceLoader = ServiceLoader.load(EC25519Provider.class, EC25519Provider.class.getClassLoader());
 					Iterator<EC25519Provider> iterator = serviceLoader.iterator();
 					if (! iterator.hasNext()) throw new RuntimeException("No " + EC25519Provider.class.getName() + " registered");
 

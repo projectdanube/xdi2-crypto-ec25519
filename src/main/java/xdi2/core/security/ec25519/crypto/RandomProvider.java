@@ -20,7 +20,7 @@ public abstract class RandomProvider {
 
 				if (result == null) {
 
-					ServiceLoader<RandomProvider> serviceLoader = ServiceLoader.load(RandomProvider.class);
+					ServiceLoader<RandomProvider> serviceLoader = ServiceLoader.load(RandomProvider.class, RandomProvider.class.getClassLoader());
 					Iterator<RandomProvider> iterator = serviceLoader.iterator();
 					if (! iterator.hasNext()) throw new RuntimeException("No " + RandomProvider.class.getName() + " registered");
 
