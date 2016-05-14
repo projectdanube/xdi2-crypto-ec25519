@@ -1,6 +1,6 @@
 package xdi2.core.security.ec25519.signature.validate;
 
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 
 import org.apache.commons.codec.binary.Base64;
@@ -36,7 +36,7 @@ public abstract class EC25519PublicKeySignatureValidator extends AbstractEC25519
 			return false;
 		}
 
-		if (log.isDebugEnabled()) log.debug("Public key found for " + signerXDIAddress + ": " + new String(Base64.encodeBase64(publicKey), Charset.forName("UTF-8")));
+		if (log.isDebugEnabled()) log.debug("Public key found for " + signerXDIAddress + ": " + new String(Base64.encodeBase64(publicKey), StandardCharsets.UTF_8));
 
 		// validate
 
