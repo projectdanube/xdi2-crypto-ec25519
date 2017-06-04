@@ -4,7 +4,7 @@ import java.math.BigInteger;
 
 class Base58 {
 
-	private static final char[] encodeTable = "4321xwvutsrqponmkjihgfedcbaABCDEFGHJKLMNPQRSTUVWXYZ98765zy".toCharArray();
+	private static final char[] encodeTable = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz".toCharArray();
 	private static final int[] reverseTable = computeReverseTable();
 
 	public static final BigInteger fiftyEight = BigInteger.valueOf(58);
