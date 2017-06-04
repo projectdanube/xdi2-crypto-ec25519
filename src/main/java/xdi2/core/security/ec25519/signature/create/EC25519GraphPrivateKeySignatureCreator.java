@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import xdi2.core.Graph;
+import xdi2.core.features.keys.Keys;
 import xdi2.core.features.nodetypes.XdiCommonRoot;
 import xdi2.core.features.nodetypes.XdiEntity;
 import xdi2.core.syntax.XDIAddress;
@@ -55,7 +56,7 @@ public class EC25519GraphPrivateKeySignatureCreator extends EC25519PrivateKeySig
 
 		// find private key
 
-		byte[] privateKey = null;// TODO!Keys.getSignaturePrivateKey(signerXdiEntity);
+		byte[] privateKey = ec25519PrivateKeyFromPrivateKeyString(Keys.getSignaturePrivateKey(signerXdiEntity));
 
 		// done
 

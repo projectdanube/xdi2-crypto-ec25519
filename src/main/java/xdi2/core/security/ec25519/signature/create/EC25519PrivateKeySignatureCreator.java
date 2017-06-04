@@ -10,6 +10,7 @@ import xdi2.core.features.signatures.EC25519Signature;
 import xdi2.core.features.signatures.Signature;
 import xdi2.core.features.signatures.Signatures;
 import xdi2.core.security.ec25519.crypto.EC25519Provider;
+import xdi2.core.security.ec25519.util.EC25519Base58;
 import xdi2.core.syntax.XDIAddress;
 
 /**
@@ -102,6 +103,13 @@ public abstract class EC25519PrivateKeySignatureCreator extends AbstractEC25519S
 	/*
 	 * Helper methods
 	 */
+
+	public static byte[] ec25519PrivateKeyFromPrivateKeyString(String privateKeyString) throws GeneralSecurityException {
+
+		if (privateKeyString == null) return null;
+
+		return EC25519Base58.decode(privateKeyString);
+	}
 
 	public static String getPrivateKeyAlgorithm(byte[] privateKey) {
 

@@ -31,7 +31,7 @@ public class EC25519CloudNumberUtil {
 		if (! isEC25519CloudNumber(cloudNumber)) return null;
 
 		String string = cloudNumber.toString().substring(2 + EC25519Constants.XDI_SCHEME_EC25519.length());
-		byte[] bytes = Base58.decode(string);
+		byte[] bytes = EC25519Base58.decode(string);
 
 		if (! appCodeCorrect(bytes)) throw new GeneralSecurityException("App code invalid for EC25519 cloud number: " + cloudNumber);
 		if (! checksumCorrect(bytes)) throw new GeneralSecurityException("Checksum invalid for EC25519 cloud number: " + cloudNumber);
@@ -76,6 +76,6 @@ public class EC25519CloudNumberUtil {
 		System.arraycopy(bytesAppCodeAndKey, 0, bytes, 0, 33);
 		System.arraycopy(bytesChecksum, 0, bytes, 33, 4);
 
-		return Base58.encode(bytes);
+		return EC25519Base58.encode(bytes);
 	}
 }
