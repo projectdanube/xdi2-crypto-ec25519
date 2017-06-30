@@ -2,9 +2,9 @@ package xdi2.core.security.ec25519.util;
 
 import java.math.BigInteger;
 
-class Base58 {
+public class EC25519Base58 {
 
-	private static final char[] encodeTable = "4321xwvutsrqponmkjihgfedcbaABCDEFGHJKLMNPQRSTUVWXYZ98765zy".toCharArray();
+	private static final char[] encodeTable = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz".toCharArray();
 	private static final int[] reverseTable = computeReverseTable();
 
 	public static final BigInteger fiftyEight = BigInteger.valueOf(58);
@@ -19,7 +19,7 @@ class Base58 {
 		return encodeTable[v];
 	}
 
-	static String encode(byte[] bytes) {
+	public static String encode(byte[] bytes) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -48,7 +48,7 @@ class Base58 {
 		return sb.toString() + sb2.reverse().toString();
 	}
 
-	static byte[] decode(String b58) {
+	public static byte[] decode(String b58) {
 
 		int zeros = 0;
 		for (int i = 0; i < b58.length(); i++) {

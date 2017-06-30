@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import xdi2.core.features.signatures.EC25519Signature;
 import xdi2.core.security.ec25519.crypto.EC25519Provider;
+import xdi2.core.security.ec25519.util.EC25519Base58;
 import xdi2.core.syntax.XDIAddress;
 
 /**
@@ -49,4 +50,15 @@ public abstract class EC25519PublicKeySignatureValidator extends AbstractEC25519
 	}
 
 	protected abstract byte[] getPublicKey(XDIAddress signerXDIAddress) throws GeneralSecurityException;
+
+	/*
+	 * Helper methods
+	 */
+
+	public static byte[] ec25519PublicKeyFromPublicKeyString(String publicKeyString) throws GeneralSecurityException {
+
+		if (publicKeyString == null) return null;
+
+		return EC25519Base58.decode(publicKeyString);
+	}
 }
