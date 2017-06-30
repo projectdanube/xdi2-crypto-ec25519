@@ -24,7 +24,7 @@ public class NaClSodiumEC25519Provider extends EC25519Provider {
 	@Override
 	public void generateEC25519KeyPair(byte[] publicKey, byte[] privateKey) throws GeneralSecurityException {
 
-		if (privateKey.length != Sodium.PUBLICKEY_BYTES + Sodium.PUBLICKEY_BYTES) throw new GeneralSecurityException("Invalid private key length.");
+		if (privateKey.length != Sodium.SECRETKEY_BYTES + Sodium.PUBLICKEY_BYTES) throw new GeneralSecurityException("Invalid private key length.");
 		if (publicKey.length != Sodium.PUBLICKEY_BYTES) throw new GeneralSecurityException("Invalid public key length.");
 
 		// create seed
