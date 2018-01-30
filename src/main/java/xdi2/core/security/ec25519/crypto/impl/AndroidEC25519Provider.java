@@ -18,6 +18,14 @@ public class AndroidEC25519Provider extends EC25519Provider {
 		byte[] seed = RandomProvider.get().randomBytes(256);
 		seed = SHA256Provider.get().sha256(seed);
 
+		// done
+
+		generateEC25519KeyPairFromSeed(publicKey, privateKey, seed);
+	}
+
+	@Override
+	public void generateEC25519KeyPairFromSeed(byte[] publicKey, byte[] privateKey, byte[] seed) throws GeneralSecurityException {
+
 		// create private key
 
 		System.arraycopy(seed, 0, privateKey, 0, 32);
