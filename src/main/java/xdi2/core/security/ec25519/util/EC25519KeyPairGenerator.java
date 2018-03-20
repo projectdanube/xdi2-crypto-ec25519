@@ -7,4 +7,9 @@ public class EC25519KeyPairGenerator {
 
 		EC25519Provider.get().generateEC25519KeyPair(publicKey, privateKey);
 	}
+
+	public static void generateEC25519KeyPairFromSeed(byte[] publicKey, byte[] privateKey, byte[] seed) throws Exception {
+
+		EC25519Provider.get().generateEC25519KeyPairFromSeed(publicKey, privateKey, seed);
+	}
 }
